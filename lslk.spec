@@ -2,7 +2,7 @@ Summary:	A lock file lister
 Summary(pl):	Program wypisuj±cy pliki blokuj±ce
 Name:		lslk
 Version:	1.29
-Release:	2
+Release:	3
 License:	Free
 Group:		Development/Debuggers
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
@@ -25,7 +25,8 @@ tar xf lslk_%{version}.tar
 %build
 cd lslk_%{version}
 ./Configure -n linux
-%{__make} DEBUG="%{rpmcflags}"
+%{__make} \
+	DEBUG="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -42,5 +43,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 # XXX should be mode 4755, but for now leave the setuid off
-%attr(0755,root,root) %{_sbindir}/lslk
+%attr(755,root,root) %{_sbindir}/lslk
 %{_mandir}/man8/*
