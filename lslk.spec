@@ -21,7 +21,7 @@ tar xf lslk_%{version}.tar
 %build
 cd lslk_%{version}
 ./Configure -n linux
-%{__make} DEBUG="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"
+%{__make} DEBUG="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
