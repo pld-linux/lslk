@@ -1,6 +1,6 @@
 Summary:	A lock file lister
 Name:		lslk
-Version:	1.25
+Version:	1.26
 Release:	1
 Copyright:	Free
 Group:		Development/Debuggers
@@ -9,9 +9,9 @@ Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Lslk is a lock file lister. Lslk attempts to list all of the locks on the
-executing system's local files (i.e., on the active inodes). Install lslk
-if you need a utility for listing file locks.
+Lslk is a lock file lister. Lslk attempts to list all of the locks on
+the executing system's local files (i.e., on the active inodes).
+Install lslk if you need a utility for listing file locks.
 
 %prep
 %setup -q -c -n lslk
