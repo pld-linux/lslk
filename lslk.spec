@@ -1,7 +1,8 @@
 Summary:	A lock file lister
+Summary(pl):	Program wypisuj±cy pliki blokuj±ce
 Name:		lslk
 Version:	1.29
-Release:	1
+Release:	2
 License:	Free
 Group:		Development/Debuggers
 Group(de):	Entwicklung/Debugger
@@ -13,6 +14,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Lslk is a lock file lister. Lslk attempts to list all of the locks on
 the executing system's local files (i.e., on the active inodes).
 Install lslk if you need a utility for listing file locks.
+
+%description -l pl
+lslk to program wypisuj±cy pliki blokuj±ce. Próbuje wypisaæ wszystkie
+blokady na lokalnych plikach (czyli aktywnych inodach).
 
 %prep
 %setup -q -c -n lslk
@@ -30,7 +35,7 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 cd lslk_%{version}
 
 install lslk $RPM_BUILD_ROOT%{_sbindir}
-install lslk.8 $RPM_BUILD_ROOT%{_mandir}/man8/
+install lslk.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 %clean
 rm -rf $RPM_BUILD_ROOT
