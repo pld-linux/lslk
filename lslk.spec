@@ -1,7 +1,7 @@
 Summary:	A lock file lister
 Name:		lslk
-Version:	1.28
-Release:	2
+Version:	1.29
+Release:	1
 License:	Free
 Group:		Development/Debuggers
 Group(de):	Entwicklung/Debugger
