@@ -2,7 +2,7 @@ Summary:	A lock file lister
 Summary(pl):	Program wypisuj±cy pliki blokuj±ce
 Name:		lslk
 Version:	1.29
-Release:	3
+Release:	4
 License:	Free
 Group:		Development/Debuggers
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
@@ -21,6 +21,11 @@ blokady na lokalnych plikach (czyli aktywnych inodach).
 %prep
 %setup -q -c -n lslk
 tar xf lslk_%{version}.tar
+
+# force linux/proc dialect even if /proc is not mounted on builder
+sed -e 's@test -r /proc/locks@true@' lslk_%{version}/Configure > c.tmp
+mv -f c.tmp lslk_%{version}/Configure
+chmod +x lslk_%{version}/Configure
 
 %build
 cd lslk_%{version}
