@@ -6,6 +6,7 @@ Release:	2
 License:	Free
 Group:		Development/Debuggers
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
+# Source0-md5:	cbd17b18bb7ad435c604aa7dc2026c47
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
