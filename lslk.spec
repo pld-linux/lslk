@@ -6,7 +6,7 @@ Copyright:	Free
 Group:		Development/Debuggers
 Group(pl):	Programowanie/Odpluskwiacze
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Lslk is a lock file lister. Lslk attempts to list all of the locks on the
