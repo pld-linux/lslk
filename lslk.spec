@@ -1,7 +1,7 @@
 Summary:	A lock file lister
 Name:		lslk
 Version:	1.27
-Release:	1
+Release:	2
 Copyright:	Free
 Group:		Development/Debuggers
 Group(de):	Entwicklung/Debugger
@@ -21,7 +21,7 @@ tar xf lslk_%{version}.tar
 %build
 cd lslk_%{version}
 ./Configure -n linux
-%{__make} CFGF=-DLINUXV=21131 DEBUG="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
+%{__make} DEBUG="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
