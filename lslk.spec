@@ -22,7 +22,7 @@ tar xf lslk_%{version}.tar
 rm -rf $RPM_BUILD_ROOT
 [ -d lslk_%{version} ] && cd lslk_%{version}
 ./Configure -n linux
-make CFGF=-DLINUXV=21131 DEBUG="$RPM_OPT_FLAGS"
+%{__make} CFGF=-DLINUXV=21131 DEBUG="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
