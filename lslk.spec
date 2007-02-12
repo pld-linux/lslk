@@ -1,5 +1,5 @@
 Summary:	A lock file lister
-Summary(pl):	Program wypisuj±cy pliki blokuj±ce
+Summary(pl.UTF-8):   Program wypisujÄ…cy pliki blokujÄ…ce
 Name:		lslk
 Version:	1.29
 Release:	4
@@ -14,8 +14,8 @@ Lslk is a lock file lister. Lslk attempts to list all of the locks on
 the executing system's local files (i.e., on the active inodes).
 Install lslk if you need a utility for listing file locks.
 
-%description -l pl
-lslk to program wypisuj±cy pliki blokuj±ce. Próbuje wypisaæ wszystkie
+%description -l pl.UTF-8
+lslk to program wypisujÄ…cy pliki blokujÄ…ce. PrÃ³buje wypisaÄ‡ wszystkie
 blokady na lokalnych plikach (czyli aktywnych inodach).
 
 %prep
