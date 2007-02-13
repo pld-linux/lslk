@@ -1,5 +1,5 @@
 Summary:	A lock file lister
-Summary(pl.UTF-8):   Program wypisujący pliki blokujące
+Summary(pl.UTF-8):	Program wypisujący pliki blokujące
 Name:		lslk
 Version:	1.29
 Release:	4
