@@ -2,7 +2,7 @@ Summary:	A lock file lister
 Summary(pl.UTF-8):	Program wypisujący pliki blokujące
 Name:		lslk
 Version:	1.29
-Release:	4
+Release:	5
 License:	Free
 Group:		Development/Debuggers
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
