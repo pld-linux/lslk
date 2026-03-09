@@ -1,0 +1,98 @@
+--- lslk_1.29.orig/lslk.h	1999-11-10 20:55:51.000000000 +0100
++++ lslk_1.29.new/lslk.h	2026-03-09 19:01:15.629690177 +0100
+@@ -47,6 +47,12 @@
+ #include <netdb.h>
+ 
+ #include <sys/stat.h>
++#include <sys/wait.h>
++#include <unistd.h>
++#include <stdlib.h>
++#include <string.h>
++#include <signal.h>
++#include <setjmp.h>
+ 
+ #include "dlslk.h"
+ 
+--- lslk_1.29.orig/main.c	1999-11-10 20:56:05.000000000 +0100
++++ lslk_1.29.new/main.c	2026-03-09 18:59:25.689690201 +0100
+@@ -45,7 +45,7 @@
+  * main() -- the main lslk function
+  */
+ 
+-main(argc, argv)
++int main(argc, argv)
+ 	int argc;				/* argument count */
+ 	char *argv[];				/* arguments */
+ {
+--- lslk_1.29.orig/safe.c	1999-11-10 20:57:13.000000000 +0100
++++ lslk_1.29.new/safe.c	2026-03-09 18:59:33.586356868 +0100
+@@ -44,7 +44,7 @@
+ _PROTOTYPE(static void closePipes,(void));
+ _PROTOTYPE(static int dolstat,(char *path, char *buf, int len));
+ _PROTOTYPE(static int doreadlink,(char *path, char *buf, int len));
+-_PROTOTYPE(static int doinchild,(int (*fn)(), char *fp, char *rbuf, int rbln));
++_PROTOTYPE(static int doinchild,(int (*fn)(char *, char *, int), char *fp, char *rbuf, int rbln));
+ 
+ #if	defined(HASINTSIGNAL)
+ _PROTOTYPE(static int handleint,(int sig));
+@@ -117,7 +117,7 @@
+ 
+ static int
+ doinchild(fn, fp, rbuf, rbln)
+-	int (*fn)();			/* function to perform */
++	int (*fn)(char *, char *, int);	/* function to perform */
+ 	char *fp;			/* function parameter */
+ 	char *rbuf;			/* response buffer */
+ 	int rbln;			/* response buffer length */
+@@ -185,7 +185,7 @@
+ 
+ 		    char r_arg[MAXPATHLEN], r_rbuf[MAXPATHLEN];
+ 		    int r_al, r_rbln;
+-		    int (*r_fn)();
++		    int (*r_fn)(char *, char *, int);
+ 
+ 		    (void) close(Pipes[1]);
+ 		    (void) close(Pipes[2]);
+--- lslk_1.29.orig/dialects/linux/proc/dmnt.c	1999-11-10 21:02:44.000000000 +0100
++++ lslk_1.29.new/dialects/linux/proc/dmnt.c	2026-03-09 18:59:55.186356862 +0100
+@@ -97,7 +97,7 @@
+ 		if (!fp) {
+ 		    (void) fprintf(stderr,
+ 			"%s: can't allocate %d bytes for field pointers.\n",
+-			Pn, len);
++			Pn, (int)len);
+ 		    Exit(1);
+ 		}
+ 	    }
+@@ -153,7 +153,7 @@
+ 	    if (!(dn = (char *)malloc(len))) {
+ 		(void) fprintf(stderr,
+ 		    "%s: can't allocate %d bytes for directory: %s\n",
+-		    Pn, len, fp[1]);
++		    Pn, (int)len, fp[1]);
+ 		(void) fclose(mfs);
+ 		return(1);
+ 	    }
+@@ -214,7 +214,7 @@
+ 	    if (!(Mnt[NMnt].sp = (char *)malloc(len))) {
+ 		(void) fprintf(stderr,
+ 		    "%s: can't allocate %d bytes for file system: %s\n",
+-		    Pn, len, fp[0]);
++		    Pn, (int)len, fp[0]);
+ 		(void) fclose(mfs);
+ 		return(1);
+ 	    }
+--- lslk_1.29.orig/misc.c	1999-11-10 20:56:19.000000000 +0100
++++ lslk_1.29.new/misc.c	2026-03-09 19:00:13.983023525 +0100
+@@ -410,9 +410,9 @@
+ 		 * The is the second pass, so print the source, PID, device,
+ 		 * inode number, and size values.
+ 		 */
+-		    (void) printf("%-*.*s %*d %*s %*ld ",
++		    (void) printf("%-*.*s %*lu %*s %*ld ",
+ 			srcl, srcl, src,
+-			pidl, lp->pid,
++			pidl, (unsigned long)lp->pid,
+ 			devl, print_dev(lp),
+ 			inodel, lp->inum);
+ 		    if (lp->szs)
