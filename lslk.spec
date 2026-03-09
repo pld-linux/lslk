@@ -2,11 +2,15 @@ Summary:	A lock file lister
 Summary(pl.UTF-8):	Program wypisujący pliki blokujące
 Name:		lslk
 Version:	1.29
-Release:	6
+Release:	7
 License:	Free
 Group:		Development/Debuggers
 Source0:	ftp://vic.cc.purdue.edu/pub/tools/unix/lslk/%{name}_%{version}_W.tar.gz
 # Source0-md5:	cbd17b18bb7ad435c604aa7dc2026c47
+# Debian bug #434681: add missing return value in savelock()
+Patch0:		lslk-savelock-return.patch
+# Fix compilation with modern GCC (implicit int, incompatible pointer types, format strings)
+Patch1:		lslk-fix-modern-gcc.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -21,6 +25,11 @@ blokady na lokalnych plikach (czyli aktywnych inodach).
 %prep
 %setup -q -c -n lslk
 tar xf lslk_%{version}.tar
+
+cd lslk_%{version}
+%patch -P0 -p1
+%patch -P1 -p1
+cd ..
 
 # force linux/proc dialect even if /proc is not mounted on builder
 sed -e 's@test -r /proc/locks@true@' lslk_%{version}/Configure > c.tmp
